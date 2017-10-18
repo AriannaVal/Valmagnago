@@ -1,7 +1,7 @@
 # Load modules
 module load autoload bwa
 module load autoload gatk
-module load autoload r
+module load autoload r\
 
 # Environmental variables
 Fastq_R1=/pico/scratch/userexternal/mfratell/CORNELIA/analisi/fastq/MADRE_S2_R1_001.fastq
@@ -18,6 +18,7 @@ samtools sort -@ 20 nipbl.bam -o nipbl_sorted.bam
 samtools index nipbl_sorted.bam
 
 GATK_PATH=/pico/scratch/userexternal/mfratell/SW/GATK38/
+PICARD_PATH=/pico/scratch/userexternal/mfratell/SW/
 
 indels=/pico/scratch/userexternal/mfratell/GENOME/gatk_hg38/Mills_and_1000G_gold_standard.indels.hg38.vcf
 dbSNP=/pico/scratch/userexternal/mfratell/GENOME/gatk_hg38/dbsnp150.vcf
@@ -33,7 +34,7 @@ cd alla vostra cartella con i dati di padre/madre o sofia.
 #####################################
 
 # Mark Duplicates
-java -XX:ParallelGCThreads=20 -jar $PICARD_PATH/picard.jar MarkDuplicates INPUT=padre_bwa_sorted.bam OUTPUT=dedup_padre_bwa_sorted.bam METRICS_FILE=metrics.txt
+java -XX:ParallelGCThreads=20 -jar $PICARD_PATH/picard.jar MarkDuplicates INPUT=sofia_bwa_sorted.bam OUTPUT=dedup_sofia_bwa_sorted.bam METRICS_FILE=metrics.txt
 
 # Re-index bam
 java -XX:ParallelGCThreads=20 -jar $PICARD_PATH/picard.jar BuildBamIndex INPUT=dedup_padre_bwa_sorted.bam
